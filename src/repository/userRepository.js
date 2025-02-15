@@ -1,19 +1,20 @@
-import prisma from "../config/prisma";
+import prisma from "../config/prisma.js";
 
-class UserRepository {
+export default class UserRepository {
   constructor() {
     this.model = prisma.user;
   }
 
   //Register a user
   async createUser(data) {
-    return await this.model.create({data});
+    return await this.model.create({ data });
   }
 
   //Login a user
   async findUserByEmail(email) {
-    return await this.model.findUnique({ where: { email } });
+    return await this.model.findUnique({
+      where: { email },
+      select: { id: true, email: true },
+    });
   }
 }
-
-export default UserRepository;
