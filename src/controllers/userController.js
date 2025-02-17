@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 const userService = new UserService();
 
 export default class UserController {
-  //Method to creat a new user
+  //Method to create a new user
   register = async (req, res) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {
@@ -29,7 +29,7 @@ export default class UserController {
   login = async (req, res) => {
     const { email, password } = req.body;
     try {
-      const result = await userService.userLogin(email, password);
+      const result = await userService.userLogin(email, password); 
       res
         .status(200)
         .json({ message: "User successfully authticated", result });

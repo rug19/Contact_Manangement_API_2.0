@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const authenticate = (req, res, next) => {
-  const token = req.header("Authorization")?.replace("Bearer ", ""); // Adicionado espaço após "Bearer"
+  const token = req.header("Authorization")?.replace("Bearer ", ""); 
 
   if (!token) {
-    return res.status(401).json({ error: "Acesso negado. Token não fornecido." });
+    return res.status(401).json({ error: "Acess denied. Token não fornecido." });
   }
 
   try {
@@ -15,7 +15,7 @@ const authenticate = (req, res, next) => {
     req.userId = decoded.id;
     next();
   } catch (error) {
-    res.status(400).json({ error: "Token inválido." });
+    res.status(400).json({ error: "Token invalid." });
   }
 };
 
