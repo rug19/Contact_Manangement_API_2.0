@@ -23,4 +23,14 @@ model User {
   createdAt DateTime @default(now())
 }
 
+//Models related to Contact
+model Contact {
+  id Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  phone String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 

@@ -1,18 +1,20 @@
 import { initializeDb } from "./config/initializeDb.js";
 import express from "express";
 import userRoutes from "./routes/userRoutes.js";
+import contactRoutes from "./routes/contactRoutes.js"
 
 const app = express();
 
 app.use(express.json());
 
 //Routes
-app.use("/api", userRoutes);
+app.use("/auth", userRoutes);
+app.use("/api", contactRoutes);
 
 //Server
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+  console.log(`Server running in the port: ${PORT}`);
 });
 
 //Initialize the database
