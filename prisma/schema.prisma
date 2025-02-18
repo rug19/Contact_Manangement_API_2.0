@@ -25,7 +25,7 @@ model User {
 
 //Models related to Contact
 model Contact {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   name String 
   email String @unique
   phone String
