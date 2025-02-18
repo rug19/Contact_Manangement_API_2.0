@@ -7,11 +7,11 @@ import express from "express";
 const contactController = new ContactController();
 const router = express.Router();
 
-router.post("/contacts", contactValidation, contactController.createContact);
-router.get("/contacts",   contactController.getAllContacts);
-router.get("/contacts/:id",  contactController.getContactById);
-router.put("/contacts/:id", contactUpdateValidation, contactController.updateContact);
-router.delete("/contacts/:id", contactController.deleteContact);
+router.post("/contacts", authenticate, contactValidation, contactController.createContact);
+router.get("/contacts", authenticate,   contactController.getAllContacts);
+router.get("/contacts/:id", authenticate,  contactController.getContactById);
+router.put("/contacts/:id", authenticate, contactUpdateValidation, contactController.updateContact);
+router.delete("/contacts/:id", authenticate, contactController.deleteContact);
 
 export default router;
 
