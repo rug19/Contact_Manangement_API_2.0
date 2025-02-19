@@ -6,6 +6,9 @@ export class ContactService {
   async getAllContacts() {
     try {
       const allContacts = await contactRepository.getAllContacs();
+      if (!allContacts) {
+        throw new Error("Contacts not found");
+      }
       return allContacts;
     } catch (error) {
       throw new Error(`Error retrieving all the contacts`);

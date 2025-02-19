@@ -55,7 +55,7 @@ export class UserService {
         expiresIn: "1h",
       });
       console.log("User successfully authticated");
-      return token;
+      return { token };
     } catch (error) {
       throw new Error(`Error to authticate user, ${error.message}`);
     }
