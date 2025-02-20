@@ -1,4 +1,5 @@
 import ContactRepositoy from "../repository/contactRepository.js";
+import { formatDate } from "../utils/dataUtils.js";
 
 const contactRepository = new ContactRepositoy();
 
@@ -9,7 +10,12 @@ export class ContactService {
       if (!allContacts) {
         throw new Error("Contacts not found");
       }
-      return allContacts;
+      //format the datas before to return
+      return allContacts.map((contact) => ({
+        ...contact,
+        createdAt: formatDate(contact.createdAt),
+        updatedAt: formatDate(contact.updatedAt),
+      }));
     } catch (error) {
       throw new Error(`Error retrieving all the contacts`);
     }
@@ -21,7 +27,11 @@ export class ContactService {
       if (!contact) {
         throw new Error("Contact not found");
       }
-      return contact;
+      return {
+        ...contact,
+        createdAt: formatDate(contact.createdAt),
+        updatedAt: formatDate(contact.updatedAt),
+      };
     } catch (error) {
       throw new Error(`Erro ao procurar o contato ${error.message}`);
     }
@@ -36,7 +46,11 @@ export class ContactService {
         email,
       });
       console.log("Contact successfully created", newContact);
-      return newContact;
+      return {
+        ...newContact,
+        createdAt: formatDate(newContact.createdAt),
+        updatedAt: formatDate(newContact, updatedAt),
+      };
     } catch (error) {
       throw new Error(`Error creating a new contact ${error.message}`);
     }
@@ -48,14 +62,18 @@ export class ContactService {
       if (!contact) {
         throw new Error("Contact not found");
       }
+
       const contactUpdated = await contactRepository.updateContact(id, {
         name,
         phone,
         email,
       });
 
-      console.log(contactUpdated);
-      return contactUpdated;
+      return {
+        ...contactUpdated,
+        createdAt: formatDate(contactUpdated.createdAt),
+        updatedAt: formatDate(contactUpdated.updatedAt),
+      };
     } catch (error) {
       throw new Error(`Error updating the contact ${error.message}`);
     }
