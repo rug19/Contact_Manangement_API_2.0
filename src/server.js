@@ -23,3 +23,5 @@ app.listen(PORT, () => {
 
 //Initialize the database
 initializeDb();
+
+export { app };

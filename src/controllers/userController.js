@@ -17,7 +17,7 @@ export default class UserController {
       console.log(req.body);
       const user = await userService.userRegister(name, email, password);
 
-      return res.status(200).json({ message: "User successfully creates", user });
+      return res.status(201).json({ name: user.name, email: user.email });
     } catch (error) {
       if (error.message.includes("Email already register")) {
         return res.status(400).json({ error: error.message });
@@ -29,8 +29,8 @@ export default class UserController {
   login = async (req, res) => {
     const { email, password } = req.body;
     try {
-      const result = await userService.userLogin(email, password); 
-       return res
+      const result = await userService.userLogin(email, password);
+      return res
         .status(200)
         .json({ message: "User successfully authticated", result });
     } catch (error) {
